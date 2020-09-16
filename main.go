@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"blog.phumaster.dev-api/database"
+	"blog.phumaster.dev-api/model"
 	"blog.phumaster.dev-api/router"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -21,6 +22,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	} else {
+		conn.AutoMigrate(&model.User{}, &model.Article{})
 		log.Println("Connection opened!")
 	}
 	app.Use(middleware.Logger())
